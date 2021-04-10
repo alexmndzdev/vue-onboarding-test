@@ -20,9 +20,12 @@ describe('LoginPage', () => {
   describe('Login Page', () => {
     it('Has the required elements', () => {
       const findTitle = () => wrapper.find('#title');
+      const findSubtitle = () => wrapper.find('#subtitle');
 
       expect(findTitle().exists()).toBe(true);
-      expect(findTitle().text()).toBe('Login');
+      expect(findTitle().text()).toBe('Sign In');
+      expect(findSubtitle().exists()).toBe(true);
+      expect(findSubtitle().text()).toContain('Lorem ipsum');
       expect(findInputUsername().exists()).toBe(true);
       expect(findInputPassword().exists()).toBe(true);
       expect(findBtnSignIn().exists()).toBe(true);
@@ -44,7 +47,7 @@ describe('LoginPage', () => {
         findBtnSignIn().trigger('click');
         await flushPromises();
       };
-      const assertErrorMessage = message => {
+      const assertErrorMessage = (message) => {
         expect(findMsgError().exists()).toBe(true);
         expect(findMsgError().text()).toBe(message);
       };
