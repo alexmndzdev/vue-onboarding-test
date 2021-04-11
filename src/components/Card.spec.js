@@ -12,6 +12,5 @@ describe('Card', () => {
 
     const findDescription = () => wrapper.find('#description');
     expect(findDescription().exists()).toBe(true);
-    expect(findDescription().text()).toBe('logout');
   });
 });
