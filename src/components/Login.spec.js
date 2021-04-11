@@ -32,7 +32,7 @@ describe('LoginPage', () => {
       expect(findBtnSignIn().exists()).toBe(true);
       expect(findBtnSignIn().text()).toBe('Sign in');
       expect(resetPass().exists()).toBe(true);
-      expect(resetPass().text()).toBe('Forget your password?');
+      expect(resetPass().text()).toBe('Forgot your password?');
       expect(findEmailError().exists()).toBe(false);
       expect(findPasswordError().exists()).toBe(false);
     });
@@ -52,7 +52,7 @@ describe('LoginPage', () => {
         await flushPromises();
       };
 
-      it('Shows error when username or password is empty', async () => {
+      it('Shows error when email or password is empty', async () => {
         await fillLoginFieldAndSubmit('', 'password123');
         expect(findEmailError().exists()).toBe(true);
         expect(findEmailError().text()).toBe('Email is required');

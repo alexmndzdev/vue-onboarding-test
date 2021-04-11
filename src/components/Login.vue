@@ -1,28 +1,41 @@
 <template>
-  <div class="hello">
-    <h2 id="title">Sign in</h2>
-    <p id="subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit... </p>
+  <div class="card">
+    <h1 id="title">Sign in</h1>
+    <p id="subtitle">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. In nec nibh vitae...
+    </p>
     <form action="api.login">
-      <input v-model="email" id="input-email" type="email" placeholder="Email">
-      <template v-if="hasErrorEmail">
-        <span id="email-error">{{errorEmail}}</span>
-      </template>
-      <input v-model="pass" id="input-password" type="password" placeholder="Password">
-      <template v-if="hasErrorPass">
-        <span id="password-error">{{errorPass}}</span>
-      </template>
+      <div class="form-group">
+        <input
+         v-model="email"
+         id="input-email"
+         type="email"
+         placeholder="Email">
+        <template v-if="hasErrorEmail">
+          <span id="email-error">{{errorEmail}}</span>
+        </template>
+      </div>
+
+      <div class="form-group">
+        <input
+         v-model="pass"
+         id="input-password"
+         type="password"
+         placeholder="Password">
+        <template v-if="hasErrorPass">
+          <span id="password-error">{{errorPass}}</span>
+        </template>
+      </div>
+
       <button @click="doRequestLogin" id="btn-sign-in">Sign in</button>
-      <a id="reset-password" href="">Forget your password?</a>
     </form>
+    <a id="reset-password" href="">Forgot your password?</a>
   </div>
 </template>
 
 <script>
 export default {
   name: 'LoginPage',
-  props: {
-    msg: String,
-  },
   data() {
     return {
       email: '',
@@ -58,6 +71,61 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+@import '../assets/scss/_variables.scss';
+@import '../assets/scss/mixins.scss';
+  div.card{
+    width: 90%;
+    max-width: 500px;
+    background-color: #f7f7f8;
+    #title{
+      padding-top: 30px;
+      color: $font-color-primary;
+      font-family: system-ui;
+      font-weight: 500;
+    }
+    #subtitle{
+      margin: 20px 40px 30px 40px;
+      @include sm {
+        margin: 20px 80px 30px 80px;
+      }
+      color: $font-color-secondary;
+    }
+    form{
+      //margin: 0 auto;
+      margin: 0 10%;
+      @include sm {
+        margin: 0 25%;
+      }
+      div.form-group{
+        input{
+          width: -webkit-fill-available;
+          padding-left: 10px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          margin-bottom: 5px;
+        }
+        span{
+          display: block;
+          color: red;
+          text-align: initial;
+        }
+        margin-bottom: 20px;
+      }
+      button{
+        color: white;
+        background-color: $btn-primary;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width: 100%;
+      }
+    }
+    a#reset-password{
+      display: block;
+      color: $font-color-a;
+      text-decoration: none;
+      padding-top: 30px;
+      margin-bottom: 40px;
+    }
+  }
 </style>
