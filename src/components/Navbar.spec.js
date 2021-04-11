@@ -3,10 +3,13 @@ import Navbar from './Navbar.vue';
 
 describe('Navbar', () => {
   const wrapper = shallowMount(Navbar);
+  const $router = { push: jest.fn() };
   it('Has the required elements', () => {
     const findLogo = wrapper.find('#logo');
     expect(findLogo().exists()).toBe(true);
     expect(findLogo().text()).toBe('Sign in');
+    findLogo().trigger('click');
+    expect($router.push).toBeCalledWith('/');
 
     const findRoutes = wrapper.find('#routes');
     expect(findRoutes().exists()).toBe(true);
