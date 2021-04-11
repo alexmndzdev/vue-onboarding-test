@@ -11,8 +11,15 @@ describe('Navbar', () => {
     // await findLogo().trigger('click');
     // expect($router.push).toBeCalledWith('/');
 
-    const findRoutes = () => wrapper.find('#routes');
-    expect(findRoutes().exists()).toBe(true);
+    const findHomeLink = () => wrapper.find('#home-link');
+    expect(findHomeLink().exists()).toBe(true);
+    // await findHomeLink().trigger('click');
+    // expect($router.push).toBeCalledWith('/');
+
+    const findAboutLink = () => wrapper.find('#about-link');
+    expect(findAboutLink().exists()).toBe(true);
+    // await findAboutLink().trigger('click');
+    // expect($router.push).toBeCalledWith('/about');
 
     const findLogout = () => wrapper.find('#logout');
     const findLogoutIcon = () => wrapper.find('#logout-icon');

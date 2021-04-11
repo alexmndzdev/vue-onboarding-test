@@ -5,10 +5,10 @@
     </a>
     <ul id="routes">
       <li>
-        <a href="/">Home</a>
+        <a id="home-link" href="/">Home</a>
       </li>
       <li>
-        <a href="/about">About</a>
+        <a id="about-link" href="/about">About</a>
       </li>
     </ul>
     <a id="logout" href="/logout">
