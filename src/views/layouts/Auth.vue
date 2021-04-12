@@ -1,14 +1,14 @@
 <template>
-  <div class="auth">
+  <div id="auth">
     <Login />
   </div>
 </template>
 
 <script>
-import Login from '@/components/Login.vue';
+import Login from '../../components/Login.vue';
 
 export default {
-  name: 'LoginPage',
+  name: 'Auth',
   components: {
     Login,
   },
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-div.auth {
+div#auth {
   display: flex;
   height: 100vh;
   justify-content: center;
