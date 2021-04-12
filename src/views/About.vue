@@ -1,21 +1,25 @@
 <template>
   <div class="about">
-    <h1 id="title">Nombre de usuario</h1>
+    <h1 id="title">Nombre Usuario</h1>
     <p id="subtitle">
       Lorem ipsum dolor sit amet consectetur adipisicing elit.
       Impedit sequi!
     </p>
     <div class="row-icons">
-      <span
-        id="user-icon"
-        class="material-icons">
-        person_outline
-      </span>
-      <span
-        id="file-icon"
-        class="material-icons">
-        note_add
-      </span>
+      <a href="#">
+        <span
+          id="user-icon"
+          class="material-icons">
+          person_outline
+        </span>
+      </a>
+      <a href="#">
+        <span
+          id="file-icon"
+          class="material-icons">
+          note_add
+        </span>
+      </a>
     </div>
     <div id="album">
       <collage
@@ -26,9 +30,8 @@
         noImagesMsg="No Images"
         :showLoadingMsg="true"
         loadingMsg="Loading..."
-        height="50em"
-        >
-      </collage>
+        height="45em"
+      />
     </div>
   </div>
 </template>
@@ -75,6 +78,7 @@ export default {
       align-items: center;
       #user-icon,#file-icon{
         font-size: 30px;
+        color: $font-color-primary;
         @include sm {
           font-size: 45px;
         }
