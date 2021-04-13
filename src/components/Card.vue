@@ -1,7 +1,7 @@
 <template>
   <div class="card">
-    <img src="../assets/logo.png" alt="picture" id="profile-picture">
-    <h2 id="title">Lorem ipsum dolor, sit amet consectetur</h2>
+    <img :src="picture" alt="picture" id="profile-picture">
+    <h2 id="title">{{ fullName }}</h2>
     <p id="description">
     <!-- eslint-disable-line -->
       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quibusdam, facilis exercitationem
@@ -12,6 +12,15 @@
 <script>
 export default {
   name: 'Card',
+  props: ['userData'],
+  computed: {
+    fullName() {
+      return this.userData ? `${this.userData.first_name} ${this.userData.last_name}` : 'Nombre Usuario';
+    },
+    picture() {
+      return this.userData?.avatar || '../assets/logo.png';
+    },
+  },
 };
 </script>
 
