@@ -1,8 +1,8 @@
 import { shallowMount } from '@vue/test-utils';
-import About from './About.vue';
+import Album from './Album.vue';
 
-describe('About', () => {
-  const wrapper = shallowMount(About);
+describe('Album', () => {
+  const wrapper = shallowMount(Album);
   it('Has the required elements', async () => {
     const findTitle = () => wrapper.find('#title');
     expect(findTitle().exists()).toBe(true);

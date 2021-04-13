@@ -40,7 +40,7 @@
 import Collage from 'vue-collage';
 
 export default {
-  name: 'About',
+  name: 'Album',
   components: {
     Collage,
   },
