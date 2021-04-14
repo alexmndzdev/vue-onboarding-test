@@ -1,61 +1,103 @@
 <template>
   <div class="about">
-    <h1 id="title">Nombre Usuario</h1>
-    <p id="subtitle">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-      Impedit sequi!
-    </p>
-    <div class="row-icons">
-      <a href="#">
-        <span
-          id="user-icon"
-          class="material-icons">
-          person_outline
-        </span>
-      </a>
-      <a href="#">
-        <span
-          id="file-icon"
-          class="material-icons">
-          note_add
-        </span>
-      </a>
-    </div>
-    <div id="album">
-      <collage
-        :images="images"
-        :collageSizeMin="5"
-        :collageSizeMax="5"
-        :showNoImagesMsg="true"
-        noImagesMsg="No Images"
-        :showLoadingMsg="true"
-        loadingMsg="Loading..."
-        height="45em"
-      />
-    </div>
+    <template v-if="!isUserSelected">
+      <vSelect
+        :options="options"
+        label="fullName"
+        :value="selectedUser"
+        @input="setSelected"
+        />
+    </template>
+    <template v-else>
+      <h1 id="title">
+        {{ `${selectedUser.first_name} ${selectedUser.last_name}` || 'Nombre Usuario' }}
+      </h1>
+      <p id="subtitle">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Impedit sequi!
+      </p>
+      <div class="row-icons">
+        <a href="#">
+          <span
+            id="user-icon"
+            class="material-icons">
+            person_outline
+          </span>
+        </a>
+        <a href="#">
+          <span
+            id="file-icon"
+            class="material-icons">
+            note_add
+          </span>
+        </a>
+      </div>
+      <div id="album">
+        <collage
+          :images="images"
+          :collageSizeMin="5"
+          :collageSizeMax="5"
+          :showNoImagesMsg="true"
+          noImagesMsg="No Images"
+          :showLoadingMsg="true"
+          loadingMsg="Loading..."
+          height="45em"
+        />
+      </div>
+    </template>
   </div>
 </template>
 
 <script>
+import 'vue-select/dist/vue-select.css';
 import Collage from 'vue-collage';
+import vSelect from 'vue-select';
+import axios from '../axios';
 
 export default {
   name: 'Album',
   components: {
     Collage,
+    vSelect,
   },
   data() {
     return {
-      images: [
-        { image: 'https://wallpapershome.com/images/pages/pic_v/5111.jpg' },
-        { image: 'https://thumbor.forbes.com/thumbor/1280x868/https%3A%2F%2Fblogs-images.forbes.com%2Fannabel%2Ffiles%2F2018%2F02%2FLouisville_Skyline-1200x801.jpg' },
-        { image: 'https://t-ec.bstatic.com/images/hotel/max1024x768/683/68345284.jpg' },
-        { image: 'https://i.pinimg.com/originals/08/ec/94/08ec94ecf38048a2102ec4783dc88fa8.jpg' },
-        { image: 'https://t-ec.bstatic.com/images/hotel/max1024x768/873/87316855.jpg' },
-        { image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Eiffel_Tower_Vertical.JPG/802px-Eiffel_Tower_Vertical.JPG' },
-        { image: 'http://nexusandme.com/wp-content/uploads/2014/06/Ferris-Wheel.jpg' },
-      ],
+      isUserSelected: false,
+      selectedUser: {},
+      options: [],
+      images: [],
     };
+  },
+  mounted() {
+    this.getUsers();
+  },
+  methods: {
+    async getUsers() {
+      const { data } = await axios.RE.get('users?page=2');
+      const formattedData = data.data.map((_) => ({
+        ..._,
+        fullName: `${_.first_name} ${_.last_name}`,
+      }));
+      this.options = formattedData;
+    },
+    setSelected(value) {
+      this.selectedUser = value;
+      this.getInfoUser();
+    },
+    async getInfoUser() {
+      console.log('entra info');
+      const { data } = await axios.TC.get(`users/${this.selectedUser.id}`);
+      console.log('data', data);
+      this.images = data.album.map((image) => ({ image }));
+      this.isUserSelected = Object.keys(this.selectedUser).length;
+    },
+  },
+  watch: {
+    selectedUser(old, newVal) {
+      if (Object.keys(newVal).length) {
+        this.getInfoUser();
+      }
+    },
   },
 };
 </script>
