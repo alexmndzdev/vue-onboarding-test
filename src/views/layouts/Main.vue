@@ -26,19 +26,12 @@ export default {
     };
   },
   beforeMount() {
-    console.log('ACA1');
     this.getUsers();
   },
   methods: {
     async getUsers() {
-      console.log('ACA2');
-      try {
-        const { data } = await axios.get('users');
-        console.log('ACA3');
-        this.users = data.data;
-      } catch (e) {
-        console.log(e, 'error');
-      }
+      const { data } = await axios.RE.get('users');
+      this.users = data.data;
     },
   },
 };

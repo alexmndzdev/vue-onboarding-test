@@ -85,9 +85,7 @@ export default {
       this.getInfoUser();
     },
     async getInfoUser() {
-      console.log('entra info');
       const { data } = await axios.TC.get(`users/${this.selectedUser.id}`);
-      console.log('data', data);
       this.images = data.album.map((image) => ({ image }));
       this.isUserSelected = Object.keys(this.selectedUser).length;
     },
