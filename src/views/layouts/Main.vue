@@ -32,9 +32,13 @@ export default {
   methods: {
     async getUsers() {
       console.log('ACA2');
-      const { data } = await axios.get('users');
-      console.log('ACA3');
-      this.users = data.data;
+      try {
+        const { data } = await axios.get('users');
+        console.log('ACA3');
+        this.users = data.data;
+      } catch (e) {
+        console.log(e, 'error');
+      }
     },
   },
 };
