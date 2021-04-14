@@ -1,5 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import flushPromises from 'flush-promises';
+import MockAdapter from 'axios-mock-adapter';
+import axios from '../axios';
 import Login from './Login.vue';
 
 describe('LoginPage', () => {
@@ -37,21 +39,26 @@ describe('LoginPage', () => {
       expect(findPasswordError().exists()).toBe(false);
     });
 
-    // it('Allow to do log in', async () => {
-    // api.login.mockResolvedValue();
-    // await fillLoginFieldAndSubmit('Jhon', 'password123');
-    // expect(api.login).toBeCalled();
-    // expect($router.push).toBeCalledWith('home');
-    // });
+    const fillLoginFieldAndSubmit = async (email, pass) => {
+      findInputEmail().setValue(email);
+      findInputPassword().setValue(pass);
+      findBtnSignIn().trigger('click');
+      await flushPromises();
+    };
+
+    const mockAxiosRE = new MockAdapter(axios.RE);
+    const data = {
+      token: 'QpwL5tke4Pnpja7X4',
+    };
+    mockAxiosRE.onGet('login').reply(200, {
+      data,
+    });
+    it('Allow to do log in', async () => {
+      await fillLoginFieldAndSubmit('eve.holt@reqres.in', 'cityslicka');
+      expect($router.push).toBeCalledWith('home');
+    });
 
     describe('It should contain validations', () => {
-      const fillLoginFieldAndSubmit = async (username, password) => {
-        findInputEmail().setValue(username);
-        findInputPassword().setValue(password);
-        findBtnSignIn().trigger('click');
-        await flushPromises();
-      };
-
       it('Shows error when email or password is empty', async () => {
         await fillLoginFieldAndSubmit('', 'password123');
         expect(findEmailError().exists()).toBe(true);
@@ -61,13 +68,6 @@ describe('LoginPage', () => {
         expect(findPasswordError().exists()).toBe(true);
         expect(findPasswordError().text()).toBe('Password is required');
       });
-
-    // it('Shows error when API hit throws error', async () => {
-    // api.login.mockRejectedValue();
-    // await fillLoginFieldAndSubmit('Jhon', 'password123');
-    // expect(api.login).toBeCalled();
-    // assertErrorMessage('Login failed');
-    // });
     });
   });
 });

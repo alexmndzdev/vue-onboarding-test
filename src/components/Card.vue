@@ -18,7 +18,7 @@ export default {
       return this.userData ? `${this.userData.first_name} ${this.userData.last_name}` : 'Nombre Usuario';
     },
     picture() {
-      return this.userData?.avatar || '../assets/logo.png';
+      return this.userData?.avatar || 'https://www.gravatar.com/avatar/default?s=200&r=pg&d=mm';
     },
   },
 };
