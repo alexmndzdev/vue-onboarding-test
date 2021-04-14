@@ -3,4 +3,7 @@ module.exports = {
   testMatch: [
     '**/src/**/*.spec.[jt]s?(x)',
   ],
+  moduleNameMapper: {
+    '\\.(css|sass)$': 'identity-obj-proxy',
+  },
 };
