@@ -1,11 +1,20 @@
 import axios from 'axios';
 
-const baseURL = 'https://reqres.in/api/';
-const instance = axios.create({
+let baseURL = 'https://reqres.in/api/';
+const RE = axios.create({
   baseURL,
   // headers: {'X-Custom-Header': 'foobar'}
 });
 
 // instance.defaults.headers.common['Authorization'] = 'AUTH TOKEN FROM INSTANCE';
 
-export default instance;
+baseURL = 'https://my-json-server.typicode.com/alexmndzdev/vue-onboarding-test/';
+const TC = axios.create({
+  baseURL,
+});
+// instance.defaults.headers.common['Authorization'] = 'AUTH TOKEN FROM INSTANCE';
+
+export default {
+  RE,
+  TC,
+};

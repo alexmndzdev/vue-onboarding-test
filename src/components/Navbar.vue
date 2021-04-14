@@ -8,7 +8,7 @@
         <a id="home-link" href="/">Home</a>
       </li>
       <li>
-        <a id="about-link" href="/about">About</a>
+        <a id="about-link" href="/album">Album</a>
       </li>
     </ul>
     <a id="logout" href="/logout">
