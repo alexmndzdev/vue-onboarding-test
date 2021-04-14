@@ -6,6 +6,8 @@ const RE = axios.create({
   // headers: {'X-Custom-Header': 'foobar'}
 });
 
+// instance.defaults.headers.common['Authorization'] = 'AUTH TOKEN FROM INSTANCE';
+
 baseURL = 'https://my-json-server.typicode.com/alexmndzdev/vue-onboarding-test/';
 const TC = axios.create({
   baseURL,

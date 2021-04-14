@@ -2,8 +2,8 @@
   <div class="main">
     <Navbar />
     <div class="container">
-      <template v-for="n in 10" >
-        <Card :key="n"/>
+      <template v-for="user in users" >
+        <Card :key="user.id" :user-data="user" />
       </template>
     </div>
   </div>
@@ -12,12 +12,27 @@
 <script>
 import Navbar from '../../components/Navbar.vue';
 import Card from '../../components/Card.vue';
+import axios from '../../axios';
 
 export default {
   name: 'Main',
   components: {
     Navbar,
     Card,
+  },
+  data() {
+    return {
+      users: [],
+    };
+  },
+  beforeMount() {
+    this.getUsers();
+  },
+  methods: {
+    async getUsers() {
+      const { data } = await axios.RE.get('users');
+      this.users = data.data;
+    },
   },
 };
 </script>
