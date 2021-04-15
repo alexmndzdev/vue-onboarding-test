@@ -11,8 +11,17 @@
         <a id="about-link" href="/album">Album</a>
       </li>
     </ul>
-    <a id="logout" href="/logout">
-      <span id="logout-icon" class="material-icons">logout</span>
+    <a
+      id="logout"
+      @click="logout"
+      href="#"
+      >
+      <span
+        id="logout-icon"
+        class="material-icons"
+        >
+        logout
+      </span>
     </a>
     <span class="material-icons" id="search">search</span>
   </div>
@@ -21,6 +30,13 @@
 <script>
 export default {
   name: 'Navbar',
+  methods: {
+    logout(event) {
+      event.preventDefault();
+      localStorage.removeItem('token');
+      this.$router.push('/login');
+    },
+  },
 };
 </script>
 

@@ -1,5 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import flushPromises from 'flush-promises';
+import MockAdapter from 'axios-mock-adapter';
+import axios from '../axios';
 import Login from './Login.vue';
 
 describe('LoginPage', () => {
@@ -37,37 +39,40 @@ describe('LoginPage', () => {
       expect(findPasswordError().exists()).toBe(false);
     });
 
-    // it('Allow to do log in', async () => {
-    // api.login.mockResolvedValue();
-    // await fillLoginFieldAndSubmit('Jhon', 'password123');
-    // expect(api.login).toBeCalled();
-    // expect($router.push).toBeCalledWith('home');
-    // });
+    const fillLoginFieldsAndSubmit = async (email, pass) => {
+      findInputEmail().setValue(email);
+      findInputPassword().setValue(pass);
+      findBtnSignIn().trigger('click');
+      await flushPromises();
+    };
+
+    const mockAxiosRE = new MockAdapter(axios.RE);
+    const token = 'QpwL5tke4Pnpja7X4';
+    const data = {
+      token,
+    };
+    const userData = {
+      email: 'eve.holt@reqres.in',
+      password: 'cityslicka',
+    };
+    mockAxiosRE.onPost('login', userData).reply(200, {
+      data,
+    });
+    it('Allow to do log in', async () => {
+      await fillLoginFieldsAndSubmit(userData.email, userData.password);
+      expect($router.push).toBeCalledWith('/');
+    });
 
     describe('It should contain validations', () => {
-      const fillLoginFieldAndSubmit = async (username, password) => {
-        findInputEmail().setValue(username);
-        findInputPassword().setValue(password);
-        findBtnSignIn().trigger('click');
-        await flushPromises();
-      };
-
       it('Shows error when email or password is empty', async () => {
-        await fillLoginFieldAndSubmit('', 'password123');
+        await fillLoginFieldsAndSubmit('', 'password123');
         expect(findEmailError().exists()).toBe(true);
         expect(findEmailError().text()).toBe('Email is required');
 
-        await fillLoginFieldAndSubmit('Jhon', '');
+        await fillLoginFieldsAndSubmit('Jhon', '');
         expect(findPasswordError().exists()).toBe(true);
         expect(findPasswordError().text()).toBe('Password is required');
       });
-
-    // it('Shows error when API hit throws error', async () => {
-    // api.login.mockRejectedValue();
-    // await fillLoginFieldAndSubmit('Jhon', 'password123');
-    // expect(api.login).toBeCalled();
-    // assertErrorMessage('Login failed');
-    // });
     });
   });
 });

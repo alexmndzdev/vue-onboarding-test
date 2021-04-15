@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import axios from '../axios';
+
 export default {
   name: 'Login',
   data() {
@@ -56,16 +58,31 @@ export default {
     doRequestLogin(event) {
       event.preventDefault();
       if (this.areValidFields()) {
-        // TODO: axios.get
+        const userData = {
+          email: this.email,
+          password: this.pass,
+        };
+        axios.RE
+          .post('login', userData)
+          .then((res) => {
+            if (res.status === 200) {
+              axios.setTokenHeader(res.data.token);
+              return this.$router.push('/');
+            }
+            return '';
+          });
       }
     },
     areValidFields() {
       if (!this.email) {
         this.errorEmail = 'Email is required';
+        return false;
       }
       if (!this.pass) {
         this.errorPass = 'Password is required';
+        return false;
       }
+      return true;
     },
   },
 };
@@ -118,6 +135,9 @@ export default {
         padding-top: 10px;
         padding-bottom: 10px;
         width: 100%;
+        &:hover{
+          cursor: pointer;
+        }
       }
     }
     a#reset-password{
