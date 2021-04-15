@@ -39,7 +39,7 @@ describe('LoginPage', () => {
       expect(findPasswordError().exists()).toBe(false);
     });
 
-    const fillLoginFieldAndSubmit = async (email, pass) => {
+    const fillLoginFieldsAndSubmit = async (email, pass) => {
       findInputEmail().setValue(email);
       findInputPassword().setValue(pass);
       findBtnSignIn().trigger('click');
@@ -47,24 +47,29 @@ describe('LoginPage', () => {
     };
 
     const mockAxiosRE = new MockAdapter(axios.RE);
+    const token = 'QpwL5tke4Pnpja7X4';
     const data = {
-      token: 'QpwL5tke4Pnpja7X4',
+      token,
     };
-    mockAxiosRE.onGet('login').reply(200, {
+    const userData = {
+      email: 'eve.holt@reqres.in',
+      password: 'cityslicka',
+    };
+    mockAxiosRE.onPost('login', userData).reply(200, {
       data,
     });
     it('Allow to do log in', async () => {
-      await fillLoginFieldAndSubmit('eve.holt@reqres.in', 'cityslicka');
-      expect($router.push).toBeCalledWith('home');
+      await fillLoginFieldsAndSubmit(userData.email, userData.password);
+      expect($router.push).toBeCalledWith('/');
     });
 
     describe('It should contain validations', () => {
       it('Shows error when email or password is empty', async () => {
-        await fillLoginFieldAndSubmit('', 'password123');
+        await fillLoginFieldsAndSubmit('', 'password123');
         expect(findEmailError().exists()).toBe(true);
         expect(findEmailError().text()).toBe('Email is required');
 
-        await fillLoginFieldAndSubmit('Jhon', '');
+        await fillLoginFieldsAndSubmit('Jhon', '');
         expect(findPasswordError().exists()).toBe(true);
         expect(findPasswordError().text()).toBe('Password is required');
       });
