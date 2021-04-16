@@ -5,45 +5,51 @@ import Main from './Main.vue';
 import Navbar from '../../components/Navbar.vue';
 import Card from '../../components/Card.vue';
 import axios from '../../axios';
+import db from '../../../db.json';
 
 describe('Main layout', () => {
-  const data = [
-    {
-      id: 7,
-      email: 'michael.lawson@reqres.in',
-      first_name: 'Michael',
-      last_name: 'Lawson',
-      avatar: 'https://reqres.in/img/faces/7-image.jpg',
-    },
-    {
-      id: 8,
-      email: 'lindsay.ferguson@reqres.in',
-      first_name: 'Lindsay',
-      last_name: 'Ferguson',
-      avatar: 'https://reqres.in/img/faces/8-image.jpg',
-    },
-    {
-      id: 9,
-      email: 'tobias.funke@reqres.in',
-      first_name: 'Tobias',
-      last_name: 'Funke',
-      avatar: 'https://reqres.in/img/faces/9-image.jpg',
-    },
-  ];
-  const mockAxiosRE = new MockAdapter(axios.RE);
-  mockAxiosRE.onGet('users').reply(200, {
-    data,
+  const selectedUser = {
+    indexDB: 0,
+    id: db.users[0].id,
+  };
+  beforeEach(() => {
+    const mockAxiosRE = new MockAdapter(axios.RE);
+    mockAxiosRE.onGet('users?page=2').reply(200, {
+      data: db.users,
+    });
   });
   it('Has the required elements', async () => {
     const wrapper = shallowMount(Main);
     await flushPromises();
     expect(wrapper.findComponent(Navbar).exists()).toBe(true);
     expect(wrapper.findComponent(Card).exists()).toBe(true);
+    expect(wrapper.find('#side-menu').exists()).toBe(true);
   });
 
   it('Get users correctly', async () => {
     const wrapper = shallowMount(Main);
     await flushPromises();
-    expect(wrapper.vm.users.length).toBe(3);
+    expect(wrapper.vm.users.length).toBe(db.users.length);
+  });
+
+  describe('Sidebar', () => {
+    const mockAxiosTC = new MockAdapter(axios.TC);
+    const postFromUserSelected = db.posts.filter((post) => post.user_id === selectedUser.id);
+    mockAxiosTC.onGet(`posts?user_id=${selectedUser.id}`).reply(200, [...postFromUserSelected]);
+    it('Get posts correctly', async () => {
+      const wrapper = shallowMount(Main);
+      await flushPromises();
+      const card = wrapper.findAllComponents(Card).at(selectedUser.indexDB);
+      card.trigger('click.native');
+      const countPost = postFromUserSelected.length;
+      await flushPromises();
+      expect(wrapper.vm.userPosts.length).toBe(countPost);
+    });
+
+    it('Has the required elements', async () => {
+      const wrapper = shallowMount(Main);
+      await flushPromises();
+      expect(wrapper.find('#side-menu').isVisible()).toBe(true);
+    });
   });
 });

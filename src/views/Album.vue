@@ -74,9 +74,9 @@ export default {
   methods: {
     async getUsers() {
       const { data } = await axios.RE.get('users?page=2');
-      const formattedData = data.data.map((_) => ({
-        ..._,
-        fullName: `${_.first_name} ${_.last_name}`,
+      const formattedData = data.data.map((user) => ({
+        ...user,
+        fullName: `${user.first_name} ${user.last_name}`,
       }));
       this.options = formattedData;
     },

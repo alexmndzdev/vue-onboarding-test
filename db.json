@@ -1,0 +1,130 @@
+{
+    "posts": [
+        {
+            "id": 1,
+            "title": "Post 1",
+            "user_id": 8
+        },
+        {
+            "id": 2,
+            "title": "Post 2",
+            "user_id": 7
+        },
+        {
+            "id": 3,
+            "title": "Post 3",
+            "user_id": 8
+        },
+        {
+            "id": 4,
+            "title": "Post 4",
+            "user_id": 7
+        },
+        {
+            "id": 5,
+            "title": "Post 5",
+            "user_id": 10
+        },
+        {
+            "id": 6,
+            "title": "Post 6",
+            "user_id": 10
+        },
+        {
+            "id": 7,
+            "title": "Post 7",
+            "user_id": 9
+        },
+        {
+            "id": 8,
+            "title": "Post 8",
+            "user_id": 11
+        }
+    ],
+    "users": [
+        {
+            "id": 7,
+            "email": "michael.lawson@reqres.in",
+            "first_name": "Michael",
+            "last_name": "Lawson",
+            "avatar": "https://reqres.in/img/faces/7-image.jpg",
+            "album": [
+                "https://www.pivotalgamers.com/wp-content/uploads/2017/12/SteamRandomGame.png",
+                "https://www.gamasutra.com/db_area/images/news/2018/Jun/320213/supermario64thumb1.jpg",
+                "https://i.ytimg.com/vi/Cg3438Ti_Tg/hqdefault.jpg",
+                "https://static.decalgirl.com/assets/artists/random-galaxy-bio.jpg",
+                "http://images4.fanpop.com/image/photos/21700000/random-stuff-logo-random-21776032-355-218.png"
+            ]
+        },
+        {
+            "id": 8,
+            "email": "lindsay.ferguson@reqres.in",
+            "first_name": "Lindsay",
+            "last_name": "Ferguson",
+            "avatar": "https://reqres.in/img/faces/8-image.jpg",
+            "album": [
+                "https://www.pivotalgamers.com/wp-content/uploads/2017/12/SteamRandomGame.png",
+                "https://www.gamasutra.com/db_area/images/news/2018/Jun/320213/supermario64thumb1.jpg",
+                "https://i.ytimg.com/vi/Cg3438Ti_Tg/hqdefault.jpg",
+                "https://static.decalgirl.com/assets/artists/random-galaxy-bio.jpg",
+                "http://images4.fanpop.com/image/photos/21700000/random-stuff-logo-random-21776032-355-218.png"
+            ]
+        },
+        {
+            "id": 9,
+            "email": "tobias.funke@reqres.in",
+            "first_name": "Tobias",
+            "last_name": "Funke",
+            "avatar": "https://reqres.in/img/faces/9-image.jpg",
+            "album": [
+                "https://www.pivotalgamers.com/wp-content/uploads/2017/12/SteamRandomGame.png",
+                "https://www.gamasutra.com/db_area/images/news/2018/Jun/320213/supermario64thumb1.jpg",
+                "https://i.ytimg.com/vi/Cg3438Ti_Tg/hqdefault.jpg",
+                "https://static.decalgirl.com/assets/artists/random-galaxy-bio.jpg",
+                "http://images4.fanpop.com/image/photos/21700000/random-stuff-logo-random-21776032-355-218.png"
+            ]
+        },
+        {
+            "id": 10,
+            "email": "byron.fields@reqres.in",
+            "first_name": "Byron",
+            "last_name": "Fields",
+            "avatar": "https://reqres.in/img/faces/10-image.jpg",
+            "album": [
+                "https://www.pivotalgamers.com/wp-content/uploads/2017/12/SteamRandomGame.png",
+                "https://www.gamasutra.com/db_area/images/news/2018/Jun/320213/supermario64thumb1.jpg",
+                "https://i.ytimg.com/vi/Cg3438Ti_Tg/hqdefault.jpg",
+                "https://static.decalgirl.com/assets/artists/random-galaxy-bio.jpg",
+                "http://images4.fanpop.com/image/photos/21700000/random-stuff-logo-random-21776032-355-218.png"
+            ]
+        },
+        {
+            "id": 11,
+            "email": "george.edwards@reqres.in",
+            "first_name": "George",
+            "last_name": "Edwards",
+            "avatar": "https://reqres.in/img/faces/11-image.jpg",
+            "album": [
+                "https://www.pivotalgamers.com/wp-content/uploads/2017/12/SteamRandomGame.png",
+                "https://www.gamasutra.com/db_area/images/news/2018/Jun/320213/supermario64thumb1.jpg",
+                "https://i.ytimg.com/vi/Cg3438Ti_Tg/hqdefault.jpg",
+                "https://static.decalgirl.com/assets/artists/random-galaxy-bio.jpg",
+                "http://images4.fanpop.com/image/photos/21700000/random-stuff-logo-random-21776032-355-218.png"
+            ]
+        },
+        {
+            "id": 12,
+            "email": "rachel.howell@reqres.in",
+            "first_name": "Rachel",
+            "last_name": "Howell",
+            "avatar": "https://reqres.in/img/faces/12-image.jpg",
+            "album": [
+                "https://www.pivotalgamers.com/wp-content/uploads/2017/12/SteamRandomGame.png",
+                "https://www.gamasutra.com/db_area/images/news/2018/Jun/320213/supermario64thumb1.jpg",
+                "https://i.ytimg.com/vi/Cg3438Ti_Tg/hqdefault.jpg",
+                "https://static.decalgirl.com/assets/artists/random-galaxy-bio.jpg",
+                "http://images4.fanpop.com/image/photos/21700000/random-stuff-logo-random-21776032-355-218.png"
+            ]
+        }
+    ]
+}
