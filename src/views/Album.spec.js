@@ -4,6 +4,7 @@ import flushPromises from 'flush-promises';
 import MockAdapter from 'axios-mock-adapter';
 import axios from '../axios';
 import Album from './Album.vue';
+import db from '../../db.json';
 
 describe('Album', () => {
   it('Has the required elements when is not user selected', async (done) => {
@@ -12,45 +13,14 @@ describe('Album', () => {
     done();
   });
 
-  const data = [
-    {
-      id: 7,
-      email: 'michael.lawson@reqres.in',
-      first_name: 'Michael',
-      last_name: 'Lawson',
-      avatar: 'https://reqres.in/img/faces/7-image.jpg',
-      album: [
-        'https://www.pivotalgamers.com/wp-content/uploads/2017/12/SteamRandomGame.png',
-        'https://www.gamasutra.com/db_area/images/news/2018/Jun/320213/supermario64thumb1.jpg',
-        'https://i.ytimg.com/vi/Cg3438Ti_Tg/hqdefault.jpg',
-        'https://static.decalgirl.com/assets/artists/random-galaxy-bio.jpg',
-        'http://images4.fanpop.com/image/photos/21700000/random-stuff-logo-random-21776032-355-218.png',
-      ],
-    },
-    {
-      id: 8,
-      email: 'lindsay.ferguson@reqres.in',
-      first_name: 'Linda',
-      last_name: 'Ferguson',
-      avatar: 'https://reqres.in/img/faces/8-image.jpg',
-      album: [
-        'https://www.pivotalgamers.com/wp-content/uploads/2017/12/SteamRandomGame.png',
-        'https://www.gamasutra.com/db_area/images/news/2018/Jun/320213/supermario64thumb1.jpg',
-        'https://i.ytimg.com/vi/Cg3438Ti_Tg/hqdefault.jpg',
-        'https://static.decalgirl.com/assets/artists/random-galaxy-bio.jpg',
-        'http://images4.fanpop.com/image/photos/21700000/random-stuff-logo-random-21776032-355-218.png',
-      ],
-    },
-  ];
-
   const mockAxiosRE = new MockAdapter(axios.RE);
   mockAxiosRE.onGet('users?page=2').reply(200, {
-    data,
+    data: db.users,
   });
   it('Get users correctly', async () => {
     const wrapper = shallowMount(Album);
     await flushPromises();
-    expect(wrapper.vm.options.length).toBe(2);
+    expect(wrapper.vm.options.length).toBe(db.users.length);
   });
 
   describe('When an user is selected', () => {
@@ -80,20 +50,7 @@ describe('Album', () => {
     });
 
     const mockAxiosTC = new MockAdapter(axios.TC);
-    const selectedUser = {
-      id: 7,
-      email: 'michael.lawson@reqres.in',
-      first_name: 'Michael',
-      last_name: 'Lawson',
-      avatar: 'https://reqres.in/img/faces/7-image.jpg',
-      album: [
-        'https://www.pivotalgamers.com/wp-content/uploads/2017/12/SteamRandomGame.png',
-        'https://www.gamasutra.com/db_area/images/news/2018/Jun/320213/supermario64thumb1.jpg',
-        'https://i.ytimg.com/vi/Cg3438Ti_Tg/hqdefault.jpg',
-        'https://static.decalgirl.com/assets/artists/random-galaxy-bio.jpg',
-        'http://images4.fanpop.com/image/photos/21700000/random-stuff-logo-random-21776032-355-218.png',
-      ],
-    };
+    const selectedUser = db.users[0];
     mockAxiosTC.onGet(`users/${selectedUser.id}`).reply(200, {
       ...selectedUser,
     });

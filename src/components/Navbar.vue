@@ -1,6 +1,9 @@
 <template>
   <div class="navbar">
-    <a id="logo" href="/">
+    <a
+      @click="redirectHome"
+      id="logo"
+      href="#">
       DONE
     </a>
     <ul id="routes">
@@ -8,7 +11,7 @@
         <a id="home-link" href="/">Home</a>
       </li>
       <li>
-        <a id="about-link" href="/album">Album</a>
+        <a id="album-link" href="/album">Album</a>
       </li>
     </ul>
     <a
@@ -31,6 +34,10 @@
 export default {
   name: 'Navbar',
   methods: {
+    redirectHome(event) {
+      event.preventDefault();
+      this.$router.push('/');
+    },
     logout(event) {
       event.preventDefault();
       localStorage.removeItem('token');
